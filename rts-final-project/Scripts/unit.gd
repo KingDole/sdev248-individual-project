@@ -94,7 +94,6 @@ func take_damage(amount: int):
 
 func _die():
 	OnDie.emit(self)
-	queue_free()
 	
 func _healed():
 	OnHealed.emit(self)

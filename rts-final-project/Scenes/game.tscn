@@ -2382,13 +2382,13 @@ reward = 100
 position = Vector2(565, -329)
 reward = 100
 
-[node name="Unit_AI" parent="." unique_id=1353187397 instance=ExtResource("17_ewbju")]
+[node name="Larry" parent="." unique_id=1353187397 instance=ExtResource("17_ewbju")]
 position = Vector2(417, -217)
 
-[node name="Unit_AI2" parent="." unique_id=1537214879 instance=ExtResource("17_ewbju")]
+[node name="Curly" parent="." unique_id=1537214879 instance=ExtResource("17_ewbju")]
 position = Vector2(465, -191)
 
-[node name="Unit_AI3" parent="." unique_id=98973880 instance=ExtResource("17_ewbju")]
+[node name="Moe" parent="." unique_id=98973880 instance=ExtResource("17_ewbju")]
 position = Vector2(509, -165)
 
 [connection signal="pressed" from="CanvasLayer/BarracksPanel/Button" to="BuildingController" method="_build_unit" binds= ["Knight"]]

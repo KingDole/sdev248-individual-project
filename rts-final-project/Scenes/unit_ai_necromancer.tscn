@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://wh1okgvjank5"]
+
+[ext_resource type="PackedScene" uid="uid://dd1yjq0dciujj" path="res://Scenes/unit_ai.tscn" id="1_kn1c2"]
+[ext_resource type="Texture2D" uid="uid://b3w50wqgeunf8" path="res://Art/Characters/Necromancer_Attack.png" id="2_gflo6"]
+[ext_resource type="Texture2D" uid="uid://86nkgadimqxs" path="res://Art/Characters/Necromancer_Idle.png" id="3_n0khv"]
+[ext_resource type="Texture2D" uid="uid://t686rrpxo7ql" path="res://Art/Characters/Necromancer_Walk.png" id="4_flqqj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_agky8"]
+atlas = ExtResource("2_gflo6")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik0f5"]
+atlas = ExtResource("2_gflo6")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ulw5g"]
+atlas = ExtResource("2_gflo6")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i1207"]
+atlas = ExtResource("2_gflo6")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wgv17"]
+atlas = ExtResource("3_n0khv")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o210k"]
+atlas = ExtResource("3_n0khv")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8ii0"]
+atlas = ExtResource("3_n0khv")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lskkf"]
+atlas = ExtResource("3_n0khv")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5umfp"]
+atlas = ExtResource("4_flqqj")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7782d"]
+atlas = ExtResource("4_flqqj")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u55l6"]
+atlas = ExtResource("4_flqqj")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7tgwq"]
+atlas = ExtResource("4_flqqj")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pc5y8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_agky8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik0f5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ulw5g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i1207")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 4.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wgv17")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o210k")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f8ii0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lskkf")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5umfp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7782d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u55l6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7tgwq")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[node name="Unit_AINecromancer" unique_id=391341677 instance=ExtResource("1_kn1c2")]
+attack_range = 120.0
+reward = 250
+
+[node name="Sprite" parent="." index="1" unique_id=430981041]
+sprite_frames = SubResource("SpriteFrames_pc5y8")
+animation = &"Attack"
+frame_progress = 0.7561944

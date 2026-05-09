@@ -1,0 +1,83 @@
+[gd_scene format=3 uid="uid://bgmvhkkmlod1o"]
+
+[ext_resource type="Script" uid="uid://8frhjwaoibap" path="res://Scripts/menu.gd" id="1_4bw2l"]
+[ext_resource type="Texture2D" uid="uid://cecj0ieh4yaux" path="res://Art/Backgrounds/Background 1.png" id="2_64jxr"]
+[ext_resource type="PackedScene" uid="uid://dd1yjq0dciujj" path="res://Scenes/unit_ai.tscn" id="3_51how"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xhh6f"]
+font_size = 40
+
+[node name="Menu" type="Control" unique_id=754253716]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4bw2l")
+
+[node name="Background" type="TextureRect" parent="." unique_id=109201345]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_64jxr")
+
+[node name="Label" type="Label" parent="." unique_id=1517288825]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -563.0
+offset_top = -216.0
+offset_right = 565.0
+offset_bottom = -98.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "This fight is not over! Clear the next area before the dead can reclaim territory!"
+label_settings = SubResource("LabelSettings_xhh6f")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ContinueButton" type="Button" parent="." unique_id=2063113494]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.5
+offset_top = -16.0
+offset_right = 78.5
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Continue"
+
+[node name="QuitButton" type="Button" parent="." unique_id=1535583227]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -78.5
+offset_top = 82.0
+offset_right = 78.5
+offset_bottom = 153.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Quit"
+
+[node name="Unit_AI" parent="." unique_id=391341677 instance=ExtResource("3_51how")]
+position = Vector2(835, 478)
+
+[node name="Unit_AI2" parent="." unique_id=1269693342 instance=ExtResource("3_51how")]
+position = Vector2(361, 244)
+
+[connection signal="pressed" from="ContinueButton" to="." method="_next_level"]

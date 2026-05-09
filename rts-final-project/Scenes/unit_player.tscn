@@ -1,0 +1,151 @@
+[gd_scene format=3 uid="uid://c4qpsp62k4c1s"]
+
+[ext_resource type="PackedScene" uid="uid://cwgqxuay30sw6" path="res://Scenes/unit_base.tscn" id="1_mlbbb"]
+[ext_resource type="Script" uid="uid://bo4xctqxodjrc" path="res://Scripts/player_unit.gd" id="2_66hmh"]
+[ext_resource type="Texture2D" uid="uid://c4w80iks2mv8c" path="res://Art/Characters/spritesheet.png" id="3_iwxyt"]
+[ext_resource type="Script" uid="uid://peico5cil652" path="res://Scripts/player_aggro.gd" id="3_qq154"]
+
+[sub_resource type="Gradient" id="Gradient_mlbbb"]
+offsets = PackedFloat32Array(0.7222222)
+colors = PackedColorArray(0, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_66hmh"]
+gradient = SubResource("Gradient_mlbbb")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwxyt"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u42x6"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d270f"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8fdhn"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jqi3"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lujii"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6rt2j"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7l07e"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fpc2b"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nhp5j"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vua8"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3xtcd"]
+atlas = ExtResource("3_iwxyt")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n238h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwxyt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u42x6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d270f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8fdhn")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jqi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lujii")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6rt2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7l07e")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fpc2b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nhp5j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2vua8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3xtcd")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iwxyt"]
+radius = 38.118237
+
+[node name="Unit_Player" unique_id=391341677 node_paths=PackedStringArray("animations") groups=["Healable", "UnitPlayer"] instance=ExtResource("1_mlbbb")]
+move_speed = 50.0
+cur_hp = 30
+max_hp = 30
+attack_range = 30.0
+attack_damage = 3
+reward = 200
+animations = NodePath("Sprite")
+
+[node name="PlayerUnit" type="Node" parent="." index="0" unique_id=1653580605]
+script = ExtResource("2_66hmh")
+
+[node name="SelectionVisual" type="Sprite2D" parent="." index="1" unique_id=2026632640]
+visible = false
+position = Vector2(-2.9802322e-07, 14)
+scale = Vector2(0.10156249, 7.999999)
+texture = SubResource("GradientTexture1D_66hmh")
+
+[node name="Sprite" parent="." index="2" unique_id=430981041]
+sprite_frames = SubResource("SpriteFrames_n238h")
+autoplay = "Idle"
+
+[node name="PlayerAggro" type="Area2D" parent="." index="4" unique_id=1693233727]
+collision_layer = 0
+input_pickable = false
+script = ExtResource("3_qq154")
+
+[node name="FartFace" type="CollisionShape2D" parent="PlayerAggro" index="0" unique_id=1860106231]
+shape = SubResource("CircleShape2D_iwxyt")
+
+[connection signal="area_entered" from="PlayerAggro" to="PlayerAggro" method="_combat_range"]
+[connection signal="area_exited" from="PlayerAggro" to="PlayerAggro" method="_out_of_range"]

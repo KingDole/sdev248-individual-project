@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://dkob5qt8hf002"]
+
+[ext_resource type="PackedScene" uid="uid://c4qpsp62k4c1s" path="res://Scenes/unit_player.tscn" id="1_n7hjm"]
+[ext_resource type="Texture2D" uid="uid://dsikrvw7fv65w" path="res://Art/Characters/Cleric_Attack.png" id="2_kbdwb"]
+[ext_resource type="Texture2D" uid="uid://bv8m4vhpqd1fm" path="res://Art/Characters/Cleric_Idle.png" id="3_gbdqf"]
+[ext_resource type="Texture2D" uid="uid://bdxjxamsth80j" path="res://Art/Characters/Cleric_Walk.png" id="4_a3kbh"]
+[ext_resource type="Script" uid="uid://cnf7qi1josk0r" path="res://Scripts/healer_aggro.gd" id="5_kbdwb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j40pq"]
+atlas = ExtResource("2_kbdwb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ekosn"]
+atlas = ExtResource("2_kbdwb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_weibu"]
+atlas = ExtResource("2_kbdwb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24gtg"]
+atlas = ExtResource("2_kbdwb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wu8t1"]
+atlas = ExtResource("3_gbdqf")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13wkf"]
+atlas = ExtResource("3_gbdqf")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nrh1f"]
+atlas = ExtResource("3_gbdqf")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7ldc"]
+atlas = ExtResource("3_gbdqf")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0m87s"]
+atlas = ExtResource("4_a3kbh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ru0p5"]
+atlas = ExtResource("4_a3kbh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_25wus"]
+atlas = ExtResource("4_a3kbh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g318x"]
+atlas = ExtResource("4_a3kbh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r3fi3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j40pq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ekosn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_weibu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24gtg")
+}],
+"loop": true,
+"name": &"Attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wu8t1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13wkf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nrh1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a7ldc")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0m87s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ru0p5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_25wus")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g318x")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n7hjm"]
+radius = 120.0
+
+[node name="Unit_Cleric" unique_id=391341677 groups=["Healer"] instance=ExtResource("1_n7hjm")]
+attack_range = 120.0
+attack_damage = -10
+reward = 300
+
+[node name="Sprite" parent="." index="2" unique_id=430981041]
+sprite_frames = SubResource("SpriteFrames_r3fi3")
+animation = &"Walk"
+
+[node name="PlayerAggro" parent="." index="4" unique_id=1693233727]
+script = ExtResource("5_kbdwb")
+
+[node name="FartFace" parent="PlayerAggro" index="0" unique_id=1860106231]
+shape = SubResource("CircleShape2D_n7hjm")

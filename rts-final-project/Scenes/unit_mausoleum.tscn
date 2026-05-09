@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://bxau32ivrwb63"]
+
+[ext_resource type="Script" uid="uid://cxkgx1kd6ypa0" path="res://Scripts/unit.gd" id="1_vhltn"]
+[ext_resource type="Texture2D" uid="uid://sd63ularllg6" path="res://Art/Characters/Graveyard.png" id="2_3mcj5"]
+[ext_resource type="Script" uid="uid://dtdcw3kivk0es" path="res://Scripts/mausoleum.gd" id="2_tlhg3"]
+[ext_resource type="Script" uid="uid://c4vfdt3v4iw06" path="res://Scripts/unit_visual.gd" id="4_805jp"]
+[ext_resource type="Script" uid="uid://dbsff6v0xvi6i" path="res://Scripts/unit_health_bar.gd" id="5_mfcpk"]
+[ext_resource type="Script" uid="uid://btituhjkjm22c" path="res://Scripts/unit_audio.gd" id="6_sjk7r"]
+[ext_resource type="AudioStream" uid="uid://cl2wd81udkb6u" path="res://Sounds/take_damage.wav" id="7_cdud4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tlhg3"]
+atlas = ExtResource("2_3mcj5")
+region = Rect2(0, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71qbr"]
+atlas = ExtResource("2_3mcj5")
+region = Rect2(128, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7dx4i"]
+atlas = ExtResource("2_3mcj5")
+region = Rect2(256, 0, 128, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxprx"]
+atlas = ExtResource("2_3mcj5")
+region = Rect2(384, 0, 128, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vhltn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tlhg3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71qbr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7dx4i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxprx")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vhltn"]
+size = Vector2(116, 84)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vsbj"]
+bg_color = Color(0.099985994, 0.09998601, 0.099985965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj46g"]
+bg_color = Color(0.80126345, 4.235506e-06, 2.8878452e-07, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+
+[node name="Unit_Mausoleum" type="Area2D" unique_id=391341677 node_paths=PackedStringArray("animations") groups=["Unit"]]
+script = ExtResource("1_vhltn")
+move_speed = 0.0
+cur_hp = 100
+max_hp = 100
+attack_range = 0.0
+attack_rate = 0.0
+attack_damage = 0
+reward = 500
+team = 1
+animations = NodePath("Sprite")
+
+[node name="SpawnController" type="Node2D" parent="." unique_id=720169659 node_paths=PackedStringArray("spawnTimer", "spawnPoint")]
+script = ExtResource("2_tlhg3")
+spawnTimer = NodePath("../SpawnTimer")
+spawnPoint = NodePath("../SpawnPoint")
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=825256744]
+wait_time = 10.0
+autostart = true
+
+[node name="SpawnPoint" type="Node2D" parent="." unique_id=282095952]
+position = Vector2(-24, 59)
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=430981041]
+sprite_frames = SubResource("SpriteFrames_vhltn")
+animation = &"Idle"
+script = ExtResource("4_805jp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1438749567]
+position = Vector2(-3, 0)
+shape = SubResource("RectangleShape2D_vhltn")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1607460420]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1524464526]
+offset_left = -60.999996
+offset_top = -49.0
+offset_right = 1098.9998
+offset_bottom = -9.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_2vsbj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aj46g")
+value = 60.0
+show_percentage = false
+script = ExtResource("5_mfcpk")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=634900188]
+script = ExtResource("6_sjk7r")
+take_damage_sfx = ExtResource("7_cdud4")
+
+[connection signal="timeout" from="SpawnTimer" to="SpawnController" method="build_unit"]

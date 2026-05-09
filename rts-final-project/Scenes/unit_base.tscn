@@ -1,0 +1,61 @@
+[gd_scene format=3 uid="uid://cwgqxuay30sw6"]
+
+[ext_resource type="Script" uid="uid://cxkgx1kd6ypa0" path="res://Scripts/unit.gd" id="1_2vsbj"]
+[ext_resource type="Script" uid="uid://c4vfdt3v4iw06" path="res://Scripts/unit_visual.gd" id="3_3wtx8"]
+[ext_resource type="Script" uid="uid://dbsff6v0xvi6i" path="res://Scripts/unit_health_bar.gd" id="3_aj46g"]
+[ext_resource type="Script" uid="uid://btituhjkjm22c" path="res://Scripts/unit_audio.gd" id="5_xfv1a"]
+[ext_resource type="AudioStream" uid="uid://cl2wd81udkb6u" path="res://Sounds/take_damage.wav" id="6_kc0qg"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_00vf3"]
+animations = [{
+"frames": [],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yagyl"]
+size = Vector2(24, 17)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2vsbj"]
+bg_color = Color(0.099985994, 0.09998601, 0.099985965, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_aj46g"]
+bg_color = Color(0.80126345, 4.235506e-06, 2.8878452e-07, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.09803922, 0.09803922, 0.09803922, 1)
+
+[node name="Unit_Base" type="Area2D" unique_id=391341677 groups=["Unit"]]
+script = ExtResource("1_2vsbj")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=430981041]
+sprite_frames = SubResource("SpriteFrames_00vf3")
+animation = &"Idle"
+script = ExtResource("3_3wtx8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1438749567]
+position = Vector2(0, 6.5)
+shape = SubResource("RectangleShape2D_yagyl")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1607460420]
+path_desired_distance = 5.0
+target_desired_distance = 5.0
+
+[node name="HealthBar" type="ProgressBar" parent="." unique_id=1524464526]
+offset_left = -10.0
+offset_top = -18.0
+offset_right = 190.0
+offset_bottom = 22.0
+scale = Vector2(0.1, 0.1)
+theme_override_styles/background = SubResource("StyleBoxFlat_2vsbj")
+theme_override_styles/fill = SubResource("StyleBoxFlat_aj46g")
+value = 60.0
+show_percentage = false
+script = ExtResource("3_aj46g")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=634900188]
+script = ExtResource("5_xfv1a")
+take_damage_sfx = ExtResource("6_kc0qg")
